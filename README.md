@@ -1,33 +1,35 @@
-# Keiyoushi Extensions
+# Manga Extensions
 
-### Please give the repo a :star:
+面向 Mihon/Tachiyomi/Suwayomi 的扩展源,fork 自 [Keiyoushi Extensions](https://github.com/keiyoushi/extensions-source)。
 
-| Build                                                                                                                                                                               | Need Help?                                                                                                                                              |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [![CI](https://github.com/keiyoushi/extensions-source/actions/workflows/build_push.yml/badge.svg)](https://github.com/keiyoushi/extensions-source/actions/workflows/build_push.yml) | [![Discord](https://img.shields.io/discord/1193460528052453448.svg?label=discord&labelColor=7289da&color=2c2f33&style=flat)](https://discord.gg/3FbCpdKbdY) |
+本仓库只构建和发布 [`.github/extensions.txt`](.github/extensions.txt) 里列出的源,目前是:
 
-## Usage
-**If you are new to repository/extensions, please read the [Keiyoushi Getting Started guide](https://keiyoushi.github.io/docs/guides/getting-started#adding-the-extension-repo) first.**
+* 拷贝漫画 Copy3000 (`zh`) — [`src/zh/copy3000`](src/zh/copy3000)
 
-* You can add our repo by visiting the [Keiyoushi Website](https://keiyoushi.github.io/add-repo)
-* Otherwise, copy & paste the following URL: https://github.com/keiyoushi/extensions/raw/repo/index.pb
+## 使用方法
 
-## Requests
+在 Mihon/Suwayomi 里用这个 URL 添加仓库:
 
-To request a new source or bug fix, [create an issue](https://github.com/keiyoushi/extensions-source/issues/new/choose).
+```
+https://github.com/aar0u/manga-extensions/raw/repo/index.pb
+```
 
-Please note that creating an issue does not mean that the source will be added or fixed in a timely
-fashion, because the work is volunteer-based. Some sources may also be impossible to do or prohibitively
-difficult to maintain.
+## 为什么要单独 fork
 
-If you would like to see a request fulfilled and have the necessary skills to do so, consider contributing!
-Issues are up-for-grabs for any developer if there is no assigned user already.
+拷贝漫画的站点经常变,这个源需要按自己的节奏更新。
 
-## Contributing
+顺便的好处是,这个仓库的 [`publish-fork.yml`](.github/workflows/publish-fork.yml) 构建出来的 apk 对 Suwayomi 更友好。keiyoushi 原本的构建流程(`assembleRelease` + jar 签名)产出的扩展,有些客户端装不了——尤其是 Suwayomi,它跑在桌面 JVM 上而不是 Android 的 ART,要靠 dex2jar 把安装的 APK 反编译回 JVM class 文件,经常因此报 `VerifyError`。这个仓库改成:
 
-Contributions are welcome!
+* 每个模块只跑 `generateSourceInfo` + `packageRelease`(只出 apk,不出 jar)
+* 对受影响的模块关闭混淆压缩,保证发出去的 apk 对 dex2jar 友好
 
-Check out the repo's [issue backlog](https://github.com/keiyoushi/extensions-source/issues) for source requests and bug reports.
+## 提需求
+
+想请求新源或报 bug,去上游仓库[提 issue](https://github.com/keiyoushi/extensions-source/issues/new/choose);如果是跟这个 fork 的构建/发布方式有关的问题,可以在本仓库开 issue。
+
+## 贡献
+
+本仓库只维护少量精选的源并自行构建发布;通用的贡献请提到上游的 [keiyoushi/extensions-source](https://github.com/keiyoushi/extensions-source)。
 
 ## License
 
@@ -45,9 +47,8 @@ Check out the repo's [issue backlog](https://github.com/keiyoushi/extensions-sou
     See the License for the specific language governing permissions and
     limitations under the License.
 
-## Disclaimer
+## 免责声明
 
-This project does not have any affiliation with the content providers available.
+本项目与所收录内容的提供方没有任何关联。
 
-This project is not affiliated with Mihon/Tachiyomi. Don't ask for help about these extensions at the
-official support means of Mihon/Tachiyomi. All credits to the codebase goes to the original contributors.
+本项目与 Mihon/Tachiyomi 官方没有任何关联,请不要在 Mihon/Tachiyomi 官方支持渠道询问这些扩展的问题。代码贡献归功于原始贡献者以及 [keiyoushi/extensions-source](https://github.com/keiyoushi/extensions-source)。

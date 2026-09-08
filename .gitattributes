@@ -3,3 +3,6 @@
 
 * text=auto eol=lf
 *.bat text eol=crlf
+
+# Keep our fork's README as-is when merging in upstream changes.
+README.md merge=ours
