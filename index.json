@@ -54,6 +54,30 @@
             ]
           }
         ]
+      },
+      {
+        "name": "\u62f7\u8d1d\u6f2b\u753b Copy3000",
+        "packageName": "eu.kanade.tachiyomi.extension.zh.copy3000",
+        "resources": {
+          "apkUrl": "https://github.com/aar0u/manga-extensions/releases/download/18a3c51/tachiyomi-zh.copy3000-v1.4.1.apk",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/aar0u/manga-extensions@main/src/zh/copy3000/res/mipmap-xhdpi/ic_launcher.png"
+        },
+        "extensionLib": "1.4",
+        "versionCode": "104001",
+        "versionName": "1.4.1",
+        "contentWarning": "CONTENT_WARNING_MIXED",
+        "sources": [
+          {
+            "id": "7238667504044899585",
+            "name": "\u62f7\u8d1d\u6f2b\u753b Copy3000",
+            "language": "zh",
+            "homeUrl": "https://www.copy3000.com",
+            "mirrorUrls": [
+              "https://www.copy3000.com",
+              "https://www.copy4000.com"
+            ]
+          }
+        ]
       }
     ]
   }
