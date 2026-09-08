@@ -1,1 +1,8 @@
-{}
+{
+  "eu.kanade.tachiyomi.extension.zh.copy3000": {
+    "apk": {
+      "name": "tachiyomi-zh.copy3000-v1.4.1.apk",
+      "sha256": "3942e0fa6bc6ed76ae2b2e632185247e27e027908be38a6f5e127d1796c0eb40"
+    }
+  }
+}
