@@ -1,10 +1,9 @@
 {
-  "name": "Keiyoushi",
-  "badgeLabel": "KEI",
-  "signingKey": "9add655a78e96c4ec7a53ef89dccb557cb5d767489fac5e785d671a5a75d4da2",
+  "name": "Manga Extensions",
+  "badgeLabel": "AAR0U",
+  "signingKey": "344c59da3c2a33dbc593b686219a6cffe5f1cf411838f287c4b2c8ed7f1ca7c4",
   "contact": {
-    "website": "https://keiyoushi.github.io",
-    "discord": "https://discord.gg/3FbCpdKbdY"
+    "website": "https://github.com/aar0u/manga-extensions"
   },
   "extensionList": {}
 }
