@@ -6,7 +6,10 @@ plugins {
 
 keiyoushi {
     name = "拷贝漫画 Copy3000"
-    versionCode = 1
+    // Auto-incrementing: every build/publish should count as a new version, since
+    // publish-fork.yml always republishes every extension unconditionally (see
+    // publish-repo-fork.py). Monotonic, no overflow risk for millennia.
+    versionCode = (System.currentTimeMillis() / 60_000).toInt()
     contentWarning = ContentWarning.MIXED
     libVersion = "1.4"
 

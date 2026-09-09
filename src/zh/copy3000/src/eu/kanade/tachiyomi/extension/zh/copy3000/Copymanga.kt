@@ -129,7 +129,11 @@ abstract class Copymanga :
         val detail = DetailInfo(
             client.newCall(apiGet("$apiUrl/comic2/$pathWord")).execute().body.string().parseResultsObject(),
         )
-        val hiddenNames = hideDefaultContinuousChapter.split("\n").map { it.trim() }.filter { it.isNotEmpty() }
+        val hiddenKeywords = hideDefaultContinuousChapter
+            .split(Regex("[,，]"))
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+            .map { it.lowercase() }
 
         detail.groups.flatMap { group ->
             val chapters = mutableListOf<ChapterInfo>()
@@ -145,7 +149,11 @@ abstract class Copymanga :
                 offset += CHAPTER_PAGE_SIZE
             }
             chapters
-                .filterNot { it.name in hiddenNames }
+                .filterNot { chapter ->
+                    hiddenKeywords.any { keyword ->
+                        chapter.name.lowercase().contains(keyword)
+                    }
+                }
                 .sortedWith(compareByDescending { it.index })
                 .map { it.toSChapter(group.name) }
         }
@@ -181,8 +189,12 @@ abstract class Copymanga :
     override fun setupPreferenceScreen(screen: PreferenceScreen) {
         EditTextPreference(screen.context).apply {
             key = HIDE_CONTINUOUS_CHAPTER_PREF
-            title = "隱藏預設連載章節"
-            summary = "部分作品的預設連載章節陳舊，新章節更新在其他分組中；在這裡填寫章節名稱（一行一個）即可在獲取章節時隱藏"
+            title = "隐藏指定章节"
+            summary = """
+                输入要隐藏的章节关键词（用逗号分隔），包含关键词的章节将不显示
+
+                示例：连载,番外,单行本
+            """.trimIndent()
             setDefaultValue("")
         }.also(screen::addPreference)
     }

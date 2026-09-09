@@ -73,4 +73,12 @@ jobs:
             git push
             curl https://purge.jsdelivr.net/gh/aar0u/manga-extensions@repo/index.json
             curl https://purge.jsdelivr.net/gh/aar0u/manga-extensions@repo/index.pb
+
+            current="${GITHUB_SHA::7}"
+            gh api "repos/aar0u/manga-extensions/releases" --paginate --jq '.[].tag_name' | while read -r tag; do
+              if [[ "$tag" != "$current" && "$tag" != "$current-"* ]]; then
+                echo "Deleting release $tag"
+                gh release delete "$tag" --repo aar0u/manga-extensions --yes --cleanup-tag
+              fi
+            done
           fi
