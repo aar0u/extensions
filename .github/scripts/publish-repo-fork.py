@@ -172,11 +172,13 @@ for ext, apk, jar, apk_changed, jar_changed in new_extensions:
         ext.resources.jarUrl = old_resources.jarUrl
 
 # Merge with the already-published index, dropping the deleted/rebuilt modules.
+rebuilt_package_names = {ext.packageName for ext, _, _, _, _ in new_extensions}
 final_extensions = []
 final_extensions.extend(
     ext
     for ext in remote_proto.extensionList.extensions
-    if not any(ext.packageName.endswith(f".{module}") for module in to_delete)
+    if ext.packageName not in rebuilt_package_names
+    and not any(ext.packageName.endswith(f".{module}") for module in to_delete)
 )
 final_extensions.extend(ext for ext, _, _, _, _ in new_extensions)
 final_extensions.sort(key=lambda ext: ext.packageName)
