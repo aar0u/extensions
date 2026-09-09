@@ -50,6 +50,15 @@ jobs:
           done
           ./gradlew "${TASKS[@]}"
 
+      - name: Rename artifacts with commit id
+        working-directory: main
+        run: |
+          while IFS= read -r -d '' artifact; do
+            filename=${artifact##*/}
+            renamed=$(printf '%s' "$filename" | sed -E "s/-v[0-9]+(\.[0-9]+)+(\.(apk|jar))$/-${GITHUB_SHA::7}\\2/")
+            [ "$filename" = "$renamed" ] || mv -- "$artifact" "${artifact%/*}/$renamed"
+          done < <(find . -type f \( -path '*/outputs/apk/release/*.apk' -o -path '*/outputs/jar/release/*.jar' \) -print0)
+
       - name: Checkout repository branch
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
