@@ -5,36 +5,29 @@ plugins {
 }
 
 keiyoushi {
-    name = "拷贝漫画 Copy3000"
+    name = "Reman"
     // Auto-incrementing: derived from the number of commits touching this module's
     // directory, so versionCode only bumps when this extension's own files actually
-    // change (publish-fork.yml republishes every extension every run, but unchanged
-    // ones keep the same versionCode). Requires a non-shallow checkout in CI.
+    // change. Requires a non-shallow checkout in CI.
     versionCode.set(
         providers.exec {
             commandLine("git", "rev-list", "--count", "HEAD", "--", ".")
             workingDir = projectDir
         }.standardOutput.asText.map { it.trim().toInt() },
     )
-    contentWarning = ContentWarning.MIXED
-    libVersion = "1.4"
+    contentWarning = ContentWarning.SAFE
+    libVersion = "1.6"
 
     source {
+        name = "热漫"
         lang = "zh"
         baseUrl {
-            mirrors(
-                "https://www.copy3000.com",
-                "https://www.copy4000.com",
-            )
+            custom("http://www.yueman1.cc")
         }
     }
 
     deeplink {
-        host("copy3000.com")
-        host("www.copy3000.com")
-        host("copy4000.com")
-        host("www.copy4000.com")
-        path("/..*")
+        path("/manhua/[0-9]..*\\.html")
     }
 }
 

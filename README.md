@@ -4,7 +4,8 @@
 
 本仓库只构建和发布 [`.github/extensions.txt`](.github/extensions.txt) 里列出的源,目前是:
 
-* 拷贝漫画 Copy3000 (`zh`) — [`src/zh/copy3000`](src/zh/copy3000)
+* 拷贝漫画 Copy3000 (`zh`)
+* 热漫 (`zh`)
 
 ## 使用方法
 
